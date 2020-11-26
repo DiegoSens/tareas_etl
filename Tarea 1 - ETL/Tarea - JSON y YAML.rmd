@@ -1,0 +1,47 @@
+---
+title: "Tarea ETL - Generación de ficheros de metadatos y lectura de formatos en python/R"
+author: "Diego Senso González"
+date: "27/11/2020"
+output: html_document
+---
+## Archivo JSON
+
+Las siglas "JSON" hacen referencia a "Javascript Object Notation", por lo que es el tipo de archivo propio de Javascript, aunque también es posible utilizarlos en otros porgramas. Se trata de un formato de texto propio para el intercambio de datos. Para leer un fichero de formato JSON es necesario simplemente instalar y cargar una librería de R que permite hacerlo.
+
+```{r}
+# Se instala y carga la librería rjson
+install.packages("rjson")
+library(rjson)
+
+# Se carga el archivo seleccionado y se guarda en un objeto
+GOT_subs_s1 <- fromJSON(file = "data_json.json")
+
+# Se imprimiría el resultado
+#print(GOT_subs_s1)
+```
+
+
+## Archivo YAML
+
+El formato YAML supone un fichero de datos al igual que lo son otros como XML o CSV. Para leer un archivo YAML en Python es necesario instalar el paquete "yaml" en R, que permite leer este tipo de archivos. Tras haberlo instalado se procede a cargar y visualizar el archivo:
+
+```{r}
+# Se instala y carga la librería rjson
+install.packages("yaml")
+library(yaml)
+
+# Se carga el archivo seleccionado y se guarda en un objeto
+cricket <- yaml.load_file("data_yaml.yaml")
+
+# Se imprimiría el resultado
+#print(cricket)
+```
+
+
+## ¿Se pueden leer con spark?
+
+Sí, es posible leer tanto archivos JSON como YAML con Spark. En el caso de los archivos JSON, Spark SQL puede leer este tipo de archivos y cargarlos como un dataset. En el caso de los YAML, es necesario definir una función para que lo haga, al igual que ocurre en Python.
+
+## ¿Qué tipo de bases de datos No SQL usa estructuras de datos similares?
+ 
+Dentro de las bases de datos NoSQL, MongoDB opera con archivos BSON, que son una evolución del formato JSON. También CouchDB (sistema creado por Apache) trabaja con bases de datos en formato JSON.
